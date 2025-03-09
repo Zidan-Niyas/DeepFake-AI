@@ -13,10 +13,6 @@ venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
 
-# Make sure your model files are in this directory:
-# - deepfake_audio_model.h5
-# - scaler.joblib
-
 # Run the Flask server
 flask run --host=0.0.0.0 --port=5000
 ```
@@ -25,7 +21,7 @@ flask run --host=0.0.0.0 --port=5000
 
 ```shellscript
 # In a new terminal, navigate to your project root
-cd deepfake-audio-detection
+cd DeepFake-AI
 
 # Run the development server
 npm run dev
