@@ -15,7 +15,7 @@ cd DeepFake-AI
 
 ## 🚀 Running the Project Locally
 
-#### Step 1: Start the Backend Server
+### Step 1: Start the Backend Server
 
 ```shellscript
 # Navigate to the backend directory
