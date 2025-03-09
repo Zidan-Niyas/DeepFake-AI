@@ -1,7 +1,9 @@
 # DeepFake-AI
-## Running the Project Locally
+This AI-ML based deepfake audio detection model uses advanced machine learning techniques to analyze audio files and determine the likelihood of them being artificially generated or manipulated.
 
-### Step 1: Start the Backend Server
+### Running the Project Locally
+
+#### Step 1: Start the Backend Server
 
 ```shellscript
 # Navigate to the backend directory
