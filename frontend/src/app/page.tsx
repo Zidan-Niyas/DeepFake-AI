@@ -1,20 +1,30 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import Header from './components/Header'
-import AudioUpload from './components/AudioUpload'
-import ResultsDisplay from './components/ResultsDisplay'
-import ProjectInfo from './components/ProjectInfo'
-import Footer from './components/Footer'
-import { AudioWaveformIcon as Waveform } from 'lucide-react'
+import { useState } from "react"
+import Header from "./components/Header"
+import AudioUpload from "./components/AudioUpload"
+import VoiceRecorder from "./components/VoiceRecorder"
+import ResultsDisplay from "./components/ResultsDisplay"
+import ProjectInfo from "./components/ProjectInfo"
+import Footer from "./components/Footer"
+import { AudioWaveformIcon as Waveform } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs"
 
 export default function Home() {
   const [result, setResult] = useState<number | null>(null)
   const [isBonafide, setIsBonafide] = useState<boolean | null>(null)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const handleResult = (prediction: number, isBonafide: boolean) => {
     setResult(prediction)
     setIsBonafide(isBonafide)
+  }
+
+  const handleFileSelected = (file: File) => {
+    setSelectedFile(file)
+    // Reset results when a new file is selected
+    setResult(null)
+    setIsBonafide(null)
   }
 
   return (
@@ -32,7 +42,18 @@ export default function Home() {
         </div>
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <AudioUpload onResult={handleResult} />
+            <Tabs defaultValue="upload" className="w-full">
+              <TabsList className="grid grid-cols-2 bg-gray-700">
+                <TabsTrigger value="upload">Upload Audio</TabsTrigger>
+                <TabsTrigger value="record">Record Voice</TabsTrigger>
+              </TabsList>
+              <TabsContent value="upload">
+                <AudioUpload onResult={handleResult} onFileSelected={handleFileSelected} />
+              </TabsContent>
+              <TabsContent value="record">
+                <VoiceRecorder onRecordingComplete={handleFileSelected} onResult={handleResult} />
+              </TabsContent>
+            </Tabs>
             <ResultsDisplay result={result} isBonafide={isBonafide} />
           </div>
           <ProjectInfo />

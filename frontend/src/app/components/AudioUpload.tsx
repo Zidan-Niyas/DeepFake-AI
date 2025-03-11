@@ -10,13 +10,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/ca
 import { Upload, Loader2 } from "lucide-react"
 import AudioPlayer from "./AudioPlayer"
 
-export default function AudioUpload({ onResult }: { onResult: (result: number, isBonafide: boolean) => void }) {
+interface AudioUploadProps {
+  onResult: (result: number, isBonafide: boolean) => void
+  onFileSelected: (file: File) => void
+}
+
+export default function AudioUpload({ onResult, onFileSelected }: AudioUploadProps) {
   const [file, setFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0])
+      const selectedFile = e.target.files[0]
+      setFile(selectedFile)
+      onFileSelected(selectedFile)
     }
   }
 
